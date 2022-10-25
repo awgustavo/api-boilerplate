@@ -1,24 +1,20 @@
 import express, { Request, Response, Router } from 'express'
 import { IResponse } from '../../interfaces/ibase-response'
-import { IRESTHandler } from './irest-handler'
+import { IRESTHandler } from '../irest-handler'
 
 type FuncType<T> = (T) => IResponse<T>;
 
 export class ExpressHandler implements IRESTHandler {
-    router: Router
     private app
 
     constructor() {
         this.app = express()
+        this.app.use(express.json())
+        this.app.use(express.urlencoded())
 
         this.app.get('/health-check', (req, res) => {
             res.json({ 'app-staus': 'running' })
         })
-
-        this.router = express.Router()
-    }
-    getRouter() {
-        throw new Error('Method not implemented.')
     }
 
     public async handler<T>(request: Request, response: Response, controllerFunction: FuncType<T>) {

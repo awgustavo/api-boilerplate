@@ -1,3 +1,3 @@
 export interface IBaseDomain {
-  id: any;
+  id: string | number;
 }

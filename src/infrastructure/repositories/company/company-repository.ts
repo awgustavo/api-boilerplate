@@ -1,25 +1,26 @@
-import { CompanyDTO } from '../../../shared/dtos/company-dto'
-import { IBaseDTO } from '../../../shared/interfaces/ibase-dto'
-import { IResponse } from '../../../shared/interfaces/ibase-response'
-import { ICompanyRepository } from './icompany-repository'
+import { CompanyDTO } from "../../entities/company-dto";
+import { IPersistenceHandler } from "../../../shared/pesistence/ipersistence-handler";
+import { ResponseList } from "../../../shared/result/response-list";
+import { ICompanyRepository } from "./icompany-repository";
 
 export class CompanyRepository implements ICompanyRepository {
-    getByID(id: number): IBaseDTO {
-        throw new Error('Method not implemented.')
-    }
+  constructor(private persistenceHandler: IPersistenceHandler, private entityName: string) {}
+  getByID(id: string): CompanyDTO {
+    return this.persistenceHandler.getOneByID(id, this.entityName);
+  }
 
-    remove(id: number): IBaseDTO {
-        throw new Error('Method not implemented.')
-    }
-    create(company: CompanyDTO): CompanyDTO {
-        throw new Error('Method not implemented.')
-    }
+  remove(id: number): CompanyDTO {
+    return this.persistenceHandler.delete(id, this.entityName);
+  }
+  create(company: CompanyDTO): CompanyDTO {
+    return this.persistenceHandler.save(company, this.entityName);
+  }
 
-    update(company: CompanyDTO, id: number): CompanyDTO {
-        throw new Error('Method not implemented.')
-    }
+  update(company: CompanyDTO, id: number): CompanyDTO {
+    return this.persistenceHandler.update(company, id, this.entityName);
+  }
 
-    getByFilter(companyDTO: CompanyDTO): IResponse<CompanyDTO> {
-        throw new Error('Method not implemented.')
-    }
+  getByFilter(filter: CompanyDTO): ResponseList<CompanyDTO> {
+    return this.persistenceHandler.getByFilter(filter, this.entityName);
+  }
 }

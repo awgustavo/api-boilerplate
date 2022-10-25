@@ -1,10 +1,10 @@
+import { ResponseList } from '../result/response-list'
 import { IBaseDTO } from './ibase-dto'
-import { IResponse } from './ibase-response'
 
-export interface IBaseRepository {
-  create(dto: IBaseDTO): IBaseDTO;
-  update(dto: IBaseDTO, id: number): IBaseDTO;
-  getByFilter(dto: IBaseDTO): IResponse<IBaseDTO>;
-  getByID(id: number): IBaseDTO;
-  remove(id: number): IBaseDTO;
+export interface IBaseRepository<DTO extends IBaseDTO> {
+  create(dto: DTO): DTO;
+  update(dto: DTO, id: string | number): DTO;
+  getByFilter(dto: DTO): ResponseList<DTO>;
+  getByID(id: string | number): DTO;
+  remove(id: string | number): DTO;
 }

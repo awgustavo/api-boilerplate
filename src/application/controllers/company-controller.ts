@@ -1,24 +1,26 @@
-import { Request, Response } from 'express'
-import { ExpressHandler } from '../../shared/api/express/express-handler'
-import { IRESTHandler } from '../../shared/api/express/irest-handler'
-import { CompanyDTO } from '../../shared/dtos/company-dto'
-import { IBaseController } from '../../shared/interfaces/ibase-controller'
-import { IBaseDTO } from '../../shared/interfaces/ibase-dto'
-import { IResponse } from '../../shared/interfaces/ibase-response'
-import { ResponseApp } from '../../shared/result/response'
-import { ICompanyService } from '../services/company/icompany-service'
+import { IRESTHandler } from "../../shared/api/irest-handler";
+import { CompanyDTO } from "../../infrastructure/entities/company-dto";
+import { IBaseController } from "../../shared/interfaces/ibase-controller";
+import { IResponse } from "../../shared/interfaces/ibase-response";
+import { ResponseApp } from "../../shared/result/response";
+import { ICompanyService } from "../services/company/icompany-service";
 
 export class CompanyController implements IBaseController {
-    constructor(private companyService: ICompanyService, restHandler: IRESTHandler) {
-        restHandler.registerRoutes('get', '/companies', this.getByFilter)
-    }
+  private _companyService: ICompanyService;
+  private _restHandler: IRESTHandler;
+  constructor(companyService: ICompanyService, restHandler: IRESTHandler) {
+    this._companyService = companyService;
+    this._restHandler = restHandler;
+    restHandler.registerRoutes("get", "/companies", this.getByFilter.bind(this));
+    restHandler.registerRoutes("post", "/company", this.createNewCompany.bind(this));
+  }
 
-    public getByFilter(companyDTO: CompanyDTO): IResponse<CompanyDTO> {
-        return new ResponseApp(companyDTO, 200)
-    }
+  public getByFilter(companyDTO: CompanyDTO): IResponse<CompanyDTO> {
+    return new ResponseApp(companyDTO, 200);
+  }
 
-    public createNewCompany(request: Request, response: Response) {
-        const company = this.companyService.createNewCompany(request.body)
-        response.json(company)
-    }
+  public createNewCompany(company: CompanyDTO): IResponse<CompanyDTO> {
+    this._companyService.createNewCompany(company);
+    return new ResponseApp(company, 200);
+  }
 }
