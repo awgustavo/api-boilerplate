@@ -10,8 +10,6 @@ export class MongoDBFactory implements IPersistenceFactory<MongoDBConfig, mongoD
 
         const db: mongoDB.Db = client.db(config.dbName)
 
-        const collection: mongoDB.Collection = db.collection(config.collection)
-
         return db
     }
 

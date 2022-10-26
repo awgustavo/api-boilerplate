@@ -1,6 +1,6 @@
+import { ResponseList } from '../result/response-list'
 import { IBaseDTO } from './ibase-dto'
-import { IResponse } from './ibase-response'
 
 export interface IBaseController {
-  getByFilter(baseDTO: IBaseDTO): IResponse<IBaseDTO>;
+  getByFilter(baseDTO: IBaseDTO): ResponseList<IBaseDTO>;
 }

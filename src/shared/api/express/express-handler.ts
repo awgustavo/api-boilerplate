@@ -2,7 +2,7 @@ import express, { Request, Response, Router } from 'express'
 import { IResponse } from '../../interfaces/ibase-response'
 import { IRESTHandler } from '../irest-handler'
 
-type FuncType<T> = (T) => IResponse<T>;
+type FuncType<T> = (T, Q) => IResponse<T>;
 
 export class ExpressHandler implements IRESTHandler {
     private app
@@ -17,9 +17,10 @@ export class ExpressHandler implements IRESTHandler {
         })
     }
 
-    public async handler<T>(request: Request, response: Response, controllerFunction: FuncType<T>) {
+    public async handler<T, Q>(request: Request, response: Response, controllerFunction: FuncType<T>) {
         try {
-            const controllerResponse: IResponse<T> = await controllerFunction(request.body ?? request.query)
+            const body = Object.keys(request.body).length > 0 ? request.body : request.query
+            const controllerResponse: IResponse<T> = await controllerFunction(body, request.params)
             return response.json(controllerResponse)
         } catch (err) {
             console.error(err.stack)
@@ -27,10 +28,10 @@ export class ExpressHandler implements IRESTHandler {
         }
     }
 
-    public async registerRoutes<T>(method: string, path, controllerFunction: FuncType<T>) {
+    public async registerRoutes<T, Q>(method: string, path: string, controllerFunction: FuncType<T>) {
         const router = express.Router()
         router[method](path, (request: Request, response: Response) => {
-            return this.handler<T>(request, response, controllerFunction)
+            return this.handler<T, Q>(request, response, controllerFunction)
         })
         this.addRoutes(router)
     }
