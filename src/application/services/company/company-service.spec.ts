@@ -1,11 +1,11 @@
-import { CompanyDTO } from '../../../infrastructure/dtos/company-dto'
-import { StockDTO } from '../../../infrastructure/dtos/stock-dto'
-import { CompanyRepository } from '../../../infrastructure/repositories/company/company-repository'
-import { ResponseList } from '../../../shared/result/response-list'
-import { Summary } from '../../../shared/result/summary'
-import { CompanyService } from './company-service'
+import { CompanyDTO } from '@infrastructure/dtos/company-dto'
+import { StockDTO } from '@infrastructure/dtos/stock-dto'
+import { CompanyRepository } from '@infrastructure/repositories/company/company-repository'
+import { ResponseList } from '@shared/result/response-list'
+import { Summary } from '@shared/result/summary'
+import { CompanyService } from '@application/services/company/company-service'
 
-jest.mock('../../../infrastructure/repositories/company/company-repository')
+jest.mock('@infrastructure/repositories/company/company-repository')
 
 const CompanyRepositoryMock = CompanyRepository as jest.Mock<CompanyRepository>
 const companyRepositoryMock = new CompanyRepositoryMock()

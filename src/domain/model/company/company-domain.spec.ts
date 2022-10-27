@@ -1,16 +1,16 @@
-import { Stock } from '../stock/stock-domain'
-import { CompanyDomain } from './company-domain'
+import { StockDomain } from '@domain/model/stock/stock-domain'
+import { CompanyDomain } from '@domain/model/company/company-domain'
 
 let company
 
 beforeEach(() => {
     company = new CompanyDomain('PLANK', 31, new Date())
 
-    company.addStockHistory(new Stock(new Date(2022, 10, 1), 13.2))
-    company.addStockHistory(new Stock(new Date(2022, 10, 2), 14.5))
-    company.addStockHistory(new Stock(new Date(2022, 10, 3), 15.5))
-    company.addStockHistory(new Stock(new Date(2022, 10, 4), 14.4))
-    company.addStockHistory(new Stock(new Date(2022, 10, 5), 14.9))
+    company.addStockHistory(new StockDomain(new Date(2022, 10, 1), 13.2))
+    company.addStockHistory(new StockDomain(new Date(2022, 10, 2), 14.5))
+    company.addStockHistory(new StockDomain(new Date(2022, 10, 3), 15.5))
+    company.addStockHistory(new StockDomain(new Date(2022, 10, 4), 14.4))
+    company.addStockHistory(new StockDomain(new Date(2022, 10, 5), 14.9))
 })
 
 test('should create a company', () => {
@@ -23,7 +23,7 @@ test('should create a company', () => {
 test('should add a stock to the history', () => {
     const companyNew = new CompanyDomain('PLANK', 31, new Date())
 
-    const stock: Stock = new Stock(new Date(), 13.2)
+    const stock: StockDomain = new StockDomain(new Date(), 13.2)
     companyNew.addStockHistory(stock)
     companyNew.addStockHistory(stock)
 
@@ -43,6 +43,12 @@ test('should get a company max price to the history', () => {
 })
 
 test('should check if stock is valid to be addes to the history', () => {
-    const stock: Stock = new Stock(new Date(2022, 10, 2), 0)
+    const stock: StockDomain = new StockDomain(new Date(2022, 10, 2), 0)
     expect(company.isStockValid(stock)).toBeFalsy()
+})
+
+test('shoud get the last stock history price', () => {
+    const lastPrice = company.getLastPrice()
+
+    expect(lastPrice).toEqual(14.9)
 })

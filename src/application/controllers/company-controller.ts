@@ -1,12 +1,12 @@
-import { IRESTHandler } from '../../shared/api/irest-handler'
-import { CompanyDTO } from '../../infrastructure/dtos/company-dto'
-import { IBaseController } from '../../shared/interfaces/ibase-controller'
-import { IResponse } from '../../shared/interfaces/ibase-response'
-import { ResponseApp } from '../../shared/result/response'
-import { ICompanyService } from '../services/company/icompany-service'
-import { CompanyReportDTO } from '../../infrastructure/dtos/company-report-dto'
-import { ControllerError } from '../../shared/error/controller-error'
-import { ResponseList } from '../../shared/result/response-list'
+import { ICompanyService } from '@application/services/company/icompany-service'
+import { CompanyDTO } from '@infrastructure/dtos/company-dto'
+import { CompanyReportDTO } from '@infrastructure/dtos/company-report-dto'
+import { IRESTHandler } from '@shared/api/irest-handler'
+import { ControllerError } from '@shared/error/controller-error'
+import { IBaseController } from '@shared/interfaces/ibase-controller'
+import { IResponse } from '@shared/interfaces/ibase-response'
+import { ResponseApp } from '@shared/result/response'
+import { ResponseList } from '@shared/result/response-list'
 
 export class CompanyController implements IBaseController {
     constructor(private companyService: ICompanyService, restHandler: IRESTHandler) {

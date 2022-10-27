@@ -1,4 +1,4 @@
-import { IResponse } from '../interfaces/ibase-response'
+import { IResponse } from '@shared/interfaces/ibase-response'
 
 type FuncType<T> = (T) => IResponse<T>;
 

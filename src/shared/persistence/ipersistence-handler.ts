@@ -1,4 +1,4 @@
-import { IBaseDTO } from '../interfaces/ibase-dto'
+import { IBaseDTO } from '@shared/interfaces/ibase-dto'
 
 export interface IPersistenceHandler {
   save(entity: IBaseDTO, entityName: string);

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "tsc",
-    "dev": "npm run code-lint && npm test && nodemon --exec sucrase-node ./src/application/server.ts",
+    "dev": "npm run code-lint && npm test && ts-node-dev -r tsconfig-paths/register ./src/application/server.ts",
     "test": "jest --coverage",
     "code-lint": "eslint --ext .ts . --fix"
   },

@@ -1,5 +1,5 @@
-import { IBaseDTO } from '../interfaces/ibase-dto'
-import { IResponse } from '../interfaces/ibase-response'
+import { IBaseDTO } from '@shared/interfaces/ibase-dto'
+import { IResponse } from '@shared/interfaces/ibase-response'
 
 export class ResponseApp<T extends IBaseDTO> implements IResponse<IBaseDTO> {
     public statusCode: number

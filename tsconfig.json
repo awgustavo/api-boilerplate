@@ -6,6 +6,23 @@
         ],
         "experimentalDecorators": true,
         "esModuleInterop": true,
+        "baseUrl": ".",
+        "rootDir": "./src",
+        "paths": {
+            "@shared/*": [
+                "./src/shared/*"
+            ],
+            "@infrastructure/*": [
+                "./src/infrastructure/*"
+            ],
+            "@domain/*": [
+                "./src/domain/*"
+            ],
+            "@application/*": [
+                "./src/application/*"
+            ]
+        },
+        "sourceMap": true,
         "plugins": [
             {
                 "transform": "ts-auto-mock/transformer",
@@ -13,4 +30,10 @@
             }
         ]
     },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
 }

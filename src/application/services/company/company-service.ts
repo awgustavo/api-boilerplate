@@ -1,9 +1,9 @@
-import { ICompanyRepository } from '../../../infrastructure/repositories/company/icompany-repository'
-import { CompanyDTO } from '../../../infrastructure/dtos/company-dto'
-import { ResponseList } from '../../../shared/result/response-list'
-import { ICompanyService } from './icompany-service'
-import { CompanyReportDTO } from '../../../infrastructure/dtos/company-report-dto'
-import { CompanyMapper } from '../../../infrastructure/mappers/company-mapper'
+import { ICompanyRepository } from '@infrastructure/repositories/company/icompany-repository'
+import { CompanyDTO } from '@infrastructure/dtos/company-dto'
+import { ResponseList } from '@shared/result/response-list'
+import { ICompanyService } from '@application/services/company/icompany-service'
+import { CompanyReportDTO } from '@infrastructure/dtos/company-report-dto'
+import { CompanyMapper } from '@infrastructure/mappers/company-mapper'
 
 export class CompanyService implements ICompanyService {
     constructor(private companyRepository: ICompanyRepository) {}

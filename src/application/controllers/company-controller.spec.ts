@@ -1,15 +1,15 @@
-import { CompanyDTO } from '../../infrastructure/dtos/company-dto'
-import { CompanyReportDTO } from '../../infrastructure/dtos/company-report-dto'
-import { StockDTO } from '../../infrastructure/dtos/stock-dto'
-import { CompanyRepository } from '../../infrastructure/repositories/company/company-repository'
-import { ExpressHandler } from '../../shared/api/express/express-handler'
-import { ResponseList } from '../../shared/result/response-list'
-import { Summary } from '../../shared/result/summary'
-import { CompanyService } from '../services/company/company-service'
-import { CompanyController } from './company-controller'
+import { CompanyService } from '@application/services/company/company-service'
+import { CompanyDTO } from '@infrastructure/dtos/company-dto'
+import { CompanyReportDTO } from '@infrastructure/dtos/company-report-dto'
+import { StockDTO } from '@infrastructure/dtos/stock-dto'
+import { CompanyRepository } from '@infrastructure/repositories/company/company-repository'
+import { ExpressHandler } from '@shared/api/express/express-handler'
+import { ResponseList } from '@shared/result/response-list'
+import { Summary } from '@shared/result/summary'
+import { CompanyController } from '@application/controllers/company-controller'
 
-jest.mock('../../infrastructure/repositories/company/company-repository')
-jest.mock('../../shared/api/express/express-handler')
+jest.mock('@infrastructure/repositories/company/company-repository')
+jest.mock('@shared/api/express/express-handler')
 
 const CompanyRepositoryMock = CompanyRepository as jest.Mock<CompanyRepository>
 const companyRepositoryMock = new CompanyRepositoryMock()

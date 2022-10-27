@@ -1,7 +1,7 @@
-import { CompanyDTO } from '../../dtos/company-dto'
-import { IPersistenceHandler } from '../../../shared/pesistence/ipersistence-handler'
-import { ResponseList } from '../../../shared/result/response-list'
-import { ICompanyRepository } from './icompany-repository'
+import { CompanyDTO } from '@infrastructure/dtos/company-dto'
+import { IPersistenceHandler } from '@shared/persistence/ipersistence-handler'
+import { ResponseList } from '@shared/result/response-list'
+import { ICompanyRepository } from '@infrastructure/repositories/company/icompany-repository'
 
 export class CompanyRepository implements ICompanyRepository {
     constructor(private persistenceHandler: IPersistenceHandler, private entityName: string) {}

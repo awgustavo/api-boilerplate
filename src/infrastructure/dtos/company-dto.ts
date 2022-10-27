@@ -1,5 +1,5 @@
-import { IBaseDTO } from '../../shared/interfaces/ibase-dto'
-import { StockDTO } from './stock-dto'
+import { IBaseDTO } from '@shared/interfaces/ibase-dto'
+import { StockDTO } from '@infrastructure/dtos/stock-dto'
 
 export class CompanyDTO implements IBaseDTO {
     constructor(
