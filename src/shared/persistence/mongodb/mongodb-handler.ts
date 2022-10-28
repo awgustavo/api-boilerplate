@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
-import { IBaseDTO } from '../../interfaces/ibase-dto'
-import { IPersistenceHandler } from '../ipersistence-handler'
+import { IBaseDTO } from '@shared/interfaces/ibase-dto'
+import { IPersistenceHandler } from '@shared/persistence/ipersistence-handler'
 import * as mongoDB from 'mongodb'
 
 export class MongoDBHandler implements IPersistenceHandler {
@@ -13,24 +13,24 @@ export class MongoDBHandler implements IPersistenceHandler {
 
     async update(entity: IBaseDTO, id: string, entityName: string) {
         const query = { _id: new ObjectId(id) }
-        const result = await this.db[entityName].updateOne(query, { $set: entity })
+        const result = await this.db.collection(entityName).updateOne(query, { $set: entity })
         return result
     }
 
-    async getByFilter(filter: IBaseDTO, entityName: string) {
-        const entity = (await this.db[entityName].find(filter)) as IBaseDTO[]
+    async getByFilter<Entity extends IBaseDTO>(filter: IBaseDTO, entityName: string) {
+        const entity = await this.db.collection(entityName).find<Entity>(filter, {}).toArray()
         return entity
     }
 
-    async getOneByID(id: string, entityName: string) {
+    async getOneByID<Entity extends IBaseDTO>(id: string, entityName: string): Promise<Entity> {
         const query = { _id: new ObjectId(id) }
-        const entity = (await this.db[entityName].findOne(query)) as IBaseDTO
+        const entity = await this.db.collection(entityName).findOne<Entity>(query)
         return entity
     }
 
     async delete(id: string, entityName: string) {
         const query = { _id: new ObjectId(id) }
-        const result = await this.db[entityName].deleteOne(query)
+        const result = await this.db.collection(entityName).deleteOne(query)
         return result
     }
 }

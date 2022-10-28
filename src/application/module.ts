@@ -1,12 +1,10 @@
-import { IRESTHandler } from '../shared/api/irest-handler'
-import { IBaseController } from '../shared/interfaces/ibase-controller'
-import { IBaseDTO } from '../shared/interfaces/ibase-dto'
-import { IBaseRepository } from '../shared/interfaces/ibase-repositóry'
-import { IBaseService } from '../shared/interfaces/ibase-service'
-import { IPersistenceFactory } from '../shared/pesistence/ipersistence-factory'
-import { IPersistenceHandler } from '../shared/pesistence/ipersistence-handler'
-import { MongoDBConfig } from '../shared/pesistence/mongodb/mondodb-config'
-import { MongoDBFactory } from '../shared/pesistence/mongodb/mongodb-factory'
+import { IRESTHandler } from '@shared/api/irest-handler'
+import { IBaseController } from '@shared/interfaces/ibase-controller'
+import { IBaseDTO } from '@shared/interfaces/ibase-dto'
+import { IBaseRepository } from '@shared/interfaces/ibase-repositóry'
+import { IBaseService } from '@shared/interfaces/ibase-service'
+import { IPersistenceHandler } from '@shared/persistence/ipersistence-handler'
+import { MongoDBFactory } from '@shared/persistence/mongodb/mongodb-factory'
 
 interface IBaseControllerType<DTO extends IBaseDTO> {
   new (service: IBaseService<DTO>, restHandler: IRESTHandler): IBaseController;

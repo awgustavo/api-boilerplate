@@ -1,6 +1,6 @@
-import { IPersistenceFactory } from '../ipersistence-factory'
+import { IPersistenceFactory } from '@shared/persistence/ipersistence-factory'
 import * as mongoDB from 'mongodb'
-import { MongoDBConfig } from './mondodb-config'
+import { MongoDBConfig } from '@shared/persistence/mongodb/mondodb-config'
 
 export class MongoDBFactory implements IPersistenceFactory<MongoDBConfig, mongoDB.Db> {
     async createConnection(config: MongoDBConfig): Promise<mongoDB.Db> {
@@ -9,8 +9,6 @@ export class MongoDBFactory implements IPersistenceFactory<MongoDBConfig, mongoD
         await client.connect()
 
         const db: mongoDB.Db = client.db(config.dbName)
-
-        const collection: mongoDB.Collection = db.collection(config.collection)
 
         return db
     }

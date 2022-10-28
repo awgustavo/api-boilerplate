@@ -1,27 +1,13 @@
 # api-boiler-plate
 
-### Nodemon
+### Tests
 
-npm i --save-dev nodemon sucrase
+- npm run test
 
-### Typescript
+### Run dev application
 
-npm i --save-dev typescript ts-node tsconfig-paths ts-node-dev
+- npm run dev
 
-### Jest
+### Start application
 
-npm i --save-dev ts-jest @types/jest jest
-
-### ESLINT
-
-npm i --save-dev @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
-
-npm i husky --save-dev
-npx husky install
-
-###
-
-APP dependencies
-npm i dotenv --save
-npm i express --save
-npm i @types/express --save
+-npm run start

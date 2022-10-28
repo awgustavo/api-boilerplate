@@ -1,6 +1,6 @@
-import { IBaseDTO } from '../interfaces/ibase-dto'
-import { IResponse } from '../interfaces/ibase-response'
-import { Summary } from './summary'
+import { IBaseDTO } from '@shared/interfaces/ibase-dto'
+import { IResponse } from '@shared/interfaces/ibase-response'
+import { Summary } from '@shared/result/summary'
 
 export class ResponseList<T extends IBaseDTO> implements IResponse<T[]> {
     statusCode: number

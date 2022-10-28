@@ -1,7 +1,8 @@
-import { CompanyDTO } from '../../entities/company-dto'
-import { IPersistenceHandler } from '../../../shared/pesistence/ipersistence-handler'
-import { ResponseList } from '../../../shared/result/response-list'
-import { ICompanyRepository } from './icompany-repository'
+import { CompanyDTO } from '@infrastructure/dtos/company-dto'
+import { IPersistenceHandler } from '@shared/persistence/ipersistence-handler'
+import { ResponseList } from '@shared/result/response-list'
+import { ICompanyRepository } from '@infrastructure/repositories/company/icompany-repository'
+import { Summary } from '@shared/result/summary'
 
 export class CompanyRepository implements ICompanyRepository {
     constructor(private persistenceHandler: IPersistenceHandler, private entityName: string) {}
@@ -20,7 +21,8 @@ export class CompanyRepository implements ICompanyRepository {
         return this.persistenceHandler.update(company, id, this.entityName)
     }
 
-    getByFilter(filter: CompanyDTO): ResponseList<CompanyDTO> {
-        return this.persistenceHandler.getByFilter(filter, this.entityName)
+    async getByFilter(filter: CompanyDTO): Promise<ResponseList<CompanyDTO>> {
+        const filteredData = await this.persistenceHandler.getByFilter(filter, this.entityName)
+        return new ResponseList(filteredData, 200, new Summary())
     }
 }
