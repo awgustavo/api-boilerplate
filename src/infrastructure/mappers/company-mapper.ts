@@ -20,7 +20,7 @@ export class CompanyMapper implements IBaseMapper {
             dto.name,
             dto.id,
             dto.foundationDate,
-            dto.stockHistory.map((stock: StockDTO) => new StockDomain(stock.marketDate, stock.price))
+            dto.stockHistory?.map((stock: StockDTO) => new StockDomain(stock.marketDate, stock.price))
         )
         return domain
     }

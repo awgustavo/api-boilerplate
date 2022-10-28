@@ -11,4 +11,14 @@ module.exports = {
     "^@infrastructure/(.*)$": "<rootDir>/src/infrastructure/$1",
     "^@shared/(.*)$": "<rootDir>/src/shared/$1",
   },
+  collectCoverage: true,
+  collectCoverageFrom: ["./src/domain/**", "./src/application/**", "./src/infrastructure/**"],
+  coverageThreshold: {
+    global: {
+      lines: 60,
+      funcs: 60,
+      branch: 60,
+      stmts: 60,
+    },
+  },
 };

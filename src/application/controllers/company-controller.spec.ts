@@ -34,9 +34,10 @@ const response = new ResponseList<CompanyDTO>(
     new Summary()
 )
 
-test('should return report data', () => {
-    jest.spyOn(companyRepositoryMock, 'getByFilter').mockReturnValueOnce(response)
-    const reportData: CompanyReportDTO = companyController.getReport(new CompanyDTO('PLANK', 1, new Date()))
+test('should return report data', async () => {
+    const responsePromise = new Promise<ResponseList<CompanyDTO>>((resolve) => resolve(response))
+    jest.spyOn(companyRepositoryMock, 'getByFilter').mockReturnValueOnce(responsePromise)
+    const reportData: CompanyReportDTO = await companyController.getReport(new CompanyDTO('PLANK', 1, new Date()))
 
     expect(reportData).toBeDefined()
     expect(reportData.minValue).toEqual(13.1)
@@ -44,11 +45,14 @@ test('should return report data', () => {
     expect(reportData.avgValue).toEqual(14.5)
 })
 
-test('should return report error 400', () => {
-    jest.spyOn(companyRepositoryMock, 'getByFilter').mockReturnValueOnce(response)
+test('should return report error 400', async () => {
+    const responsePromise = new Promise<ResponseList<CompanyDTO>>((resolve) =>
+        resolve(new ResponseList<CompanyDTO>([new CompanyDTO('test', 1, new Date())], 200, new Summary()))
+    )
+    jest.spyOn(companyRepositoryMock, 'getByFilter').mockReturnValueOnce(responsePromise)
     let error
     try {
-        companyController.getReport(null)
+        await companyController.getReport(null)
     } catch (err) {
         error = err
     }
@@ -58,12 +62,12 @@ test('should return report error 400', () => {
     expect(error.stack).toBeDefined()
 })
 
-test('should return report error 500', () => {
+test('should return report error 500', async () => {
     jest.resetAllMocks()
     jest.spyOn(companyRepositoryMock, 'getByFilter').mockReturnValueOnce(null)
     let error
     try {
-        companyController.getReport(new CompanyDTO('PLANK', 1, new Date()))
+        await companyController.getReport(new CompanyDTO('PLANK', 1, new Date()))
     } catch (err) {
         error = err
     }

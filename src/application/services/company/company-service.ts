@@ -8,16 +8,16 @@ import { CompanyMapper } from '@infrastructure/mappers/company-mapper'
 export class CompanyService implements ICompanyService {
     constructor(private companyRepository: ICompanyRepository) {}
 
-    getByFilter(baseDTO: CompanyDTO): ResponseList<CompanyDTO> {
-        return this.companyRepository.getByFilter(baseDTO)
+    async getByFilter(baseDTO: CompanyDTO): Promise<ResponseList<CompanyDTO>> {
+        return await this.companyRepository.getByFilter(baseDTO)
     }
 
     createNewCompany(company: CompanyDTO) {
         return this.companyRepository.create(company)
     }
 
-    getReport(company: CompanyDTO): CompanyReportDTO {
-        const companyData: ResponseList<CompanyDTO> = this.companyRepository.getByFilter(company)
+    async getReport(company: CompanyDTO): Promise<CompanyReportDTO> {
+        const companyData: ResponseList<CompanyDTO> = await this.companyRepository.getByFilter(company)
         const domainData = new CompanyMapper().toDomain(companyData.data[0])
         return new CompanyReportDTO(
             domainData.name,

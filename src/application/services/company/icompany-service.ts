@@ -4,5 +4,5 @@ import { IBaseService } from '@shared/interfaces/ibase-service'
 
 export interface ICompanyService extends IBaseService<CompanyDTO> {
   createNewCompany(company: CompanyDTO);
-  getReport(company: CompanyDTO): CompanyReportDTO;
+  getReport(company: CompanyDTO): Promise<CompanyReportDTO>;
 }

@@ -17,14 +17,14 @@ export class MongoDBHandler implements IPersistenceHandler {
         return result
     }
 
-    async getByFilter(filter: IBaseDTO, entityName: string) {
-        const entity = await this.db.collection(entityName).findOne(filter)
+    async getByFilter<Entity extends IBaseDTO>(filter: IBaseDTO, entityName: string) {
+        const entity = await this.db.collection(entityName).find<Entity>(filter, {}).toArray()
         return entity
     }
 
-    async getOneByID(id: string, entityName: string) {
+    async getOneByID<Entity extends IBaseDTO>(id: string, entityName: string): Promise<Entity> {
         const query = { _id: new ObjectId(id) }
-        const entity = await this.db.collection(entityName).findOne(query)
+        const entity = await this.db.collection(entityName).findOne<Entity>(query)
         return entity
     }
 

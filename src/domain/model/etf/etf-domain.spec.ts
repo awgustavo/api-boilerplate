@@ -28,9 +28,10 @@ test('should create a etf', () => {
     expect(etf).toBeDefined()
 })
 
-// test("should get the avg price of a etf", () => {
-//   const avgPrice = etf.getAvgPrice();
+test('should get the avg price of a etf', () => {
+    const etf: EtfDomain = new EtfDomain('etf01', companies, 15.5)
+    const avgPrice = etf.getAvgPrice()
 
-//   expect(avgPrice).toBeDefined();
-//   expect(avgPrice).toEqual(12);
-// });
+    expect(avgPrice).toBeDefined()
+    expect(avgPrice).toEqual(15.9)
+})

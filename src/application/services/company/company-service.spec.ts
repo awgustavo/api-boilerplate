@@ -29,15 +29,18 @@ test('shoud create a respository', () => {
 })
 
 test('shoud create a respository', () => {
-    const response = new ResponseList<CompanyDTO>([new CompanyDTO('test', 1, new Date())], 200, new Summary())
-    jest.spyOn(companyRepositoryMock, 'getByFilter').mockReturnValueOnce(response)
+    const responsePromise = new Promise<ResponseList<CompanyDTO>>((resolve) =>
+        resolve(new ResponseList<CompanyDTO>([new CompanyDTO('test', 1, new Date())], 200, new Summary()))
+    )
+    jest.spyOn(companyRepositoryMock, 'getByFilter').mockReturnValueOnce(responsePromise)
     const result = companyService.getByFilter(new CompanyDTO('teste', 1, new Date()))
     expect(result).toBeDefined()
 })
 
-test('shoud return report data of a specific company a respository', () => {
-    jest.spyOn(companyRepositoryMock, 'getByFilter').mockReturnValueOnce(response)
-    const result = companyService.getReport(new CompanyDTO('PLANK', 1, new Date()))
+test('shoud return report data of a specific company a respository', async () => {
+    const responsePromise = new Promise<ResponseList<CompanyDTO>>((resolve) => resolve(response))
+    jest.spyOn(companyRepositoryMock, 'getByFilter').mockReturnValueOnce(responsePromise)
+    const result = await companyService.getReport(new CompanyDTO('PLANK', 1, new Date()))
 
     expect(result).toBeDefined()
     expect(result.minValue).toEqual(13.1)
