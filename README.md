@@ -4,6 +4,10 @@
 
 - npm run test
 
-### Run application
+### Run dev application
 
 - npm run dev
+
+### Start application
+
+-npm run start
