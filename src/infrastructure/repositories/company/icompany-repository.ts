@@ -1,5 +1,4 @@
-export interface ICompanyRepository {
-  create(company: CompanyDTO): CompanyDTO;
-  update(company: CompanyDTO, id: number): CompanyDTO;
-  getByFilter(companyDTO: CompanyDTO): CompanyDTO[];
-}
+import { CompanyDTO } from '@infrastructure/dtos/company-dto'
+import { IBaseRepository } from '@shared/interfaces/ibase-repositóry'
+
+export type ICompanyRepository = IBaseRepository<CompanyDTO>;

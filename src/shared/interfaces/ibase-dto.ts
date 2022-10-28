@@ -1,3 +1,3 @@
 export interface IBaseDTO {
-  id: any;
+  id: number | string;
 }

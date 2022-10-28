@@ -1,9 +1,10 @@
-import { IBaseController } from './ibase-controller'
-import { IResponse } from './ibase-response'
+import { IBaseController } from '@shared/interfaces/ibase-controller'
+import { IBaseDTO } from '@shared/interfaces/ibase-dto'
+import { IResponse } from '@shared/interfaces/ibase-response'
 
 export interface IBaseCrudController extends IBaseController {
-  create(): IResponse;
-  update(): IResponse;
-  getByID(): IResponse;
-  delete(): IResponse;
+  create(): IResponse<IBaseDTO>;
+  update(): IResponse<IBaseDTO>;
+  getByID(): IResponse<IBaseDTO>;
+  delete(): IResponse<void>;
 }

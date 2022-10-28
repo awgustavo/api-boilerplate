@@ -1,9 +1,10 @@
-import { IBaseDTO } from './ibase-dto'
+import { ResponseList } from '@shared/result/response-list'
+import { IBaseDTO } from '@shared/interfaces/ibase-dto'
 
-export interface IBaseRepository {
-  create(dto: IBaseDTO): IBaseDTO;
-  update(dto: IBaseDTO, id: number): IBaseDTO;
-  getByFilter(dto: IBaseDTO): IBaseDTO;
-  getByID(id: number): IBaseDTO;
-  remove(id: number): IBaseDTO;
+export interface IBaseRepository<DTO extends IBaseDTO> {
+  create(dto: DTO): DTO;
+  update(dto: DTO, id: string | number): DTO;
+  getByFilter(dto: DTO): Promise<ResponseList<DTO>>;
+  getByID(id: string | number): DTO;
+  remove(id: string | number): DTO;
 }
