@@ -1,11 +1,11 @@
 import { CompanyDTO } from '@infrastructure/dtos/company-dto'
 import { StockDTO } from '@infrastructure/dtos/stock-dto'
-import { MongoDBHandler } from '@shared/persistence/mongodb/mongodb-handler'
+import { MongoDBHandler } from '@shared/infrastructure/persistence/mongodb/mongodb-handler'
 import { ResponseList } from '@shared/result/response-list'
 import { Summary } from '@shared/result/summary'
 import { CompanyRepository } from '@infrastructure/repositories/company/company-repository'
 
-jest.mock('@shared/persistence/mongodb/mongodb-handler')
+jest.mock('@shared/infrastructure/persistence/mongodb/mongodb-handler')
 
 const MongoDBHandlerMock = MongoDBHandler as jest.Mock<MongoDBHandler>
 const mongoDBHandlerMock = new MongoDBHandlerMock()

@@ -4,12 +4,16 @@ import { CompanyRepository } from '@infrastructure/repositories/company/company-
 import { ResponseList } from '@shared/result/response-list'
 import { Summary } from '@shared/result/summary'
 import { CompanyService } from '@application/services/company/company-service'
+import { SQSProvider } from '@shared/infrastructure/providers/sqs/sqs-provider'
 
 jest.mock('@infrastructure/repositories/company/company-repository')
-
 const CompanyRepositoryMock = CompanyRepository as jest.Mock<CompanyRepository>
 const companyRepositoryMock = new CompanyRepositoryMock()
-const companyService = new CompanyService(companyRepositoryMock)
+
+jest.mock('@shared/infrastructure/providers/sqs/sqs-provider')
+const SQSProviderMock = SQSProvider as jest.Mock<SQSProvider>
+const sqsProviderMock = new SQSProviderMock()
+const companyService = new CompanyService(companyRepositoryMock, sqsProviderMock)
 
 const response = new ResponseList<CompanyDTO>(
     [

@@ -1,16 +1,19 @@
 import { CompanyDTO } from '@infrastructure/dtos/company-dto'
-import { ExpressHandler } from '@shared/api/express/express-handler'
-import { IRESTHandler } from '@shared/api/irest-handler'
+import { ExpressHandler } from '@shared/infrastructure/api/express/express-handler'
+import { IRESTHandler } from '@shared/infrastructure/api/irest-handler'
 import { IBaseController } from '@shared/interfaces/ibase-controller'
-import { IPersistenceHandler } from '@shared/persistence/ipersistence-handler'
-import { MongoDBConfig } from '@shared/persistence/mongodb/mondodb-config'
-import { MongoDBFactory } from '@shared/persistence/mongodb/mongodb-factory'
-import { MongoDBHandler } from '@shared/persistence/mongodb/mongodb-handler'
+import { IPersistenceHandler } from '@shared/infrastructure/persistence/ipersistence-handler'
+import { MongoDBConfig } from '@shared/infrastructure/persistence/mongodb/mondodb-config'
+import { MongoDBFactory } from '@shared/infrastructure/persistence/mongodb/mongodb-factory'
+import { MongoDBHandler } from '@shared/infrastructure/persistence/mongodb/mongodb-handler'
 import dotenv from 'dotenv'
 import { CompanyController } from '@application/controllers/company-controller'
 import { APIModules } from '@application/module'
 import { CompanyService } from '@application/services/company/company-service'
 import { CompanyRepository } from '@infrastructure/repositories/company/company-repository'
+import { SQSProvider } from '@shared/infrastructure/providers/sqs/sqs-provider'
+import { TypeORMHandler } from '@shared/infrastructure/persistence/typeorm/typeorm-handler'
+import { apppDataSource } from '@infrastructure/providers/typeorm/app-data-source'
 
 class Server {
     private restHandler: IRESTHandler
@@ -32,7 +35,7 @@ class Server {
             new MongoDBConfig(process.env.MONGO_DB_URL, process.env.MONGO_COLLECTION, 'company')
         )
 
-        this.persistenceHandler = new MongoDBHandler(this.db)
+        this.persistenceHandler = new TypeORMHandler(apppDataSource)
 
         this.initiateControllers()
         this.restHandler.startAPI(parseInt(process.env['PORT']))
@@ -47,8 +50,10 @@ class Server {
             this.persistenceHandler,
             this.persistenceFactory,
             this.db,
-            'company'
+            'company',
+            new SQSProvider()
         )
     }
 }
+
 new Server()

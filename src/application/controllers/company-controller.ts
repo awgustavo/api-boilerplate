@@ -1,7 +1,7 @@
 import { ICompanyService } from '@application/services/company/icompany-service'
 import { CompanyDTO } from '@infrastructure/dtos/company-dto'
 import { CompanyReportDTO } from '@infrastructure/dtos/company-report-dto'
-import { IRESTHandler } from '@shared/api/irest-handler'
+import { IRESTHandler } from '@shared/infrastructure/api/irest-handler'
 import { ControllerError } from '@shared/error/controller-error'
 import { IBaseController } from '@shared/interfaces/ibase-controller'
 import { IResponse } from '@shared/interfaces/ibase-response'

@@ -3,18 +3,23 @@ import { CompanyDTO } from '@infrastructure/dtos/company-dto'
 import { CompanyReportDTO } from '@infrastructure/dtos/company-report-dto'
 import { StockDTO } from '@infrastructure/dtos/stock-dto'
 import { CompanyRepository } from '@infrastructure/repositories/company/company-repository'
-import { ExpressHandler } from '@shared/api/express/express-handler'
+import { ExpressHandler } from '@shared/infrastructure/api/express/express-handler'
 import { ResponseList } from '@shared/result/response-list'
 import { Summary } from '@shared/result/summary'
 import { CompanyController } from '@application/controllers/company-controller'
+import { SQSProvider } from '@shared/infrastructure/providers/sqs/sqs-provider'
 
 jest.mock('@infrastructure/repositories/company/company-repository')
-jest.mock('@shared/api/express/express-handler')
+jest.mock('@shared/infrastructure/api/express/express-handler')
 
 const CompanyRepositoryMock = CompanyRepository as jest.Mock<CompanyRepository>
 const companyRepositoryMock = new CompanyRepositoryMock()
 
-const companyServiceMock = new CompanyService(companyRepositoryMock)
+jest.mock('@shared/infrastructure/providers/sqs/sqs-provider')
+const SQSProviderMock = SQSProvider as jest.Mock<SQSProvider>
+const sqsProviderMock = new SQSProviderMock()
+
+const companyServiceMock = new CompanyService(companyRepositoryMock, sqsProviderMock)
 
 const ExpressHandlereMock = ExpressHandler as jest.Mock<ExpressHandler>
 const expressHandlerMock = new ExpressHandlereMock()

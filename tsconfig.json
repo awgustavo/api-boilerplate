@@ -4,8 +4,10 @@
             "jest",
             "node"
         ],
+        "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "esModuleInterop": true,
+        "moduleResolution": "node",
         "baseUrl": ".",
         "outDir": "build",
         "rootDir": "./src",

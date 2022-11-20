@@ -1,5 +1,5 @@
 {
-  "name": "api-boiler-plate",
+  "name": "api-boilerplate",
   "version": "0.0.1",
   "description": "Api Boiler Plate",
   "main": "server.js",
@@ -7,11 +7,12 @@
     "start": "ts-node -r tsconfig-paths/register ./src/application/server.ts",
     "dev": "npm run code-lint && npm test && ts-node-dev -r tsconfig-paths/register ./src/application/server.ts",
     "test": "jest --coverage",
-    "code-lint": "eslint --ext .ts . --fix"
+    "code-lint": "eslint --ext .ts . --fix",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./src/infrastructure/providers/typeorm/app-data-source.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/awgustavo/api-boiler-plate.git"
+    "url": "git+https://github.com/awgustavo/api-boilerplate.git"
   },
   "keywords": [
     "boiler_plate"
@@ -19,9 +20,9 @@
   "author": "andre_gustavo",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/awgustavo/api-boiler-plate/issues"
+    "url": "https://github.com/awgustavo/api-boilerplate/issues"
   },
-  "homepage": "https://github.com/awgustavo/api-boiler-plate#readme",
+  "homepage": "https://github.com/awgustavo/api-boilerplate#readme",
   "devDependencies": {
     "@types/jest": "^29.2.0",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
@@ -39,9 +40,18 @@
     "typescript": "^4.8.4"
   },
   "dependencies": {
+    "@aws-sdk/client-sqs": "^3.200.0",
+    "@aws-sdk/types": "^3.200.0",
     "@types/express": "^4.17.14",
+    "apollo-server": "^3.11.1",
+    "aws-sdk": "^2.1244.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongodb": "^4.11.0"
+    "graphql": "^16.6.0",
+    "mongodb": "^4.11.0",
+    "pg": "^8.8.0",
+    "tsyringe": "^4.7.0",
+    "type-graphql": "^1.1.1",
+    "typeorm": "^0.3.10"
   }
 }

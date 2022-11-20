@@ -1,6 +1,6 @@
 import { IResponse } from '@shared/interfaces/ibase-response'
 import express, { Request, Response, Router } from 'express'
-import { IRESTHandler } from '@shared/api/irest-handler'
+import { IRESTHandler } from '@shared/infrastructure/api/irest-handler'
 
 type FuncType<T> = (body, params) => IResponse<T>;
 

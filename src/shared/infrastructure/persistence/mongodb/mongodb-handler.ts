@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { IBaseDTO } from '@shared/interfaces/ibase-dto'
-import { IPersistenceHandler } from '@shared/persistence/ipersistence-handler'
+import { IPersistenceHandler } from '@shared/infrastructure/persistence/ipersistence-handler'
 import * as mongoDB from 'mongodb'
 
 export class MongoDBHandler implements IPersistenceHandler {

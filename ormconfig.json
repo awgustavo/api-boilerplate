@@ -1,0 +1,21 @@
+[
+    {
+        "name": "default",
+        "type": "postgres",
+        "host": "localhost",
+        "port": 5432,
+        "username": "postgres",
+        "password": "postgres",
+        "database": "stocks_db_dev",
+        "autoLoadEntities": true,
+        "entities": [
+            "./src/infrastructure/providers/typeorm/entities/**/*.entity.ts"
+        ],
+        "migrations": [
+            "./src/infrastructure/providers/typeorm/migrations/*.ts"
+        ],
+        "cli": {
+            "migrationsDir": "./src/infrastructure/providers/typeorm/migrations/"
+        }
+    }
+]
