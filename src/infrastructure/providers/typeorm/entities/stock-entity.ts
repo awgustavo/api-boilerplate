@@ -1,5 +1,5 @@
 import { IBaseDTO } from '@shared/interfaces/ibase-dto'
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { CompanyEntity } from './company-entity'
 
 @Entity('stock')

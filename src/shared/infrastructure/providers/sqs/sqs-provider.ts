@@ -4,8 +4,7 @@ const REGION = 'REGION'
 export class SQSProvider {
     async sendMessage(queueURL: string, message: string) {
         const sqsClient = new SQSClient(process.env['CLOUD_REGION'])
-        const data = await sqsClient.send(new SendMessageCommand(this.getParams(queueURL, message)))
-        console.log(data)
+        await sqsClient.send(new SendMessageCommand(this.getParams(queueURL, message)))
     }
 
     async receiveMessage(queueURL: string) {

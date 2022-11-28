@@ -6,7 +6,7 @@ import { CompanyEntity } from '@infrastructure/providers/typeorm/entities/compan
 export class TypeORMHandler implements IPersistenceHandler {
     constructor(private dataSource: DataSource) {}
 
-    async save(entity, entityName = null) {
+    async save(entity) {
         const repository = await this.dataSource.getRepository(CompanyEntity)
         this.dataSource.getMetadata(CompanyEntity)
         const entityCreated = await repository.save(entity)

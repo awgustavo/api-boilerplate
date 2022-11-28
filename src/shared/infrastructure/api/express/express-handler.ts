@@ -1,13 +1,14 @@
 import { IResponse } from '@shared/interfaces/ibase-response'
 import express, { Request, Response, Router } from 'express'
 import { IRESTHandler } from '@shared/infrastructure/api/irest-handler'
+import { IBaseAuthentication } from '@shared/interfaces/ibase-authentication'
 
 type FuncType<T> = (body, params) => IResponse<T>;
 
 export class ExpressHandler implements IRESTHandler {
     private app
 
-    constructor() {
+    constructor(private baseAuthentication: IBaseAuthentication) {
         this.app = express()
         this.app.use(express.json())
         this.app.use(express.urlencoded())
@@ -30,7 +31,7 @@ export class ExpressHandler implements IRESTHandler {
 
     public async registerRoutes<T>(method: string, path: string, controllerFunction: FuncType<T>) {
         const router = express.Router()
-        router[method](path, (request: Request, response: Response) => {
+        router[method](path, this.baseAuthentication.validateToken, (request: Request, response: Response) => {
             return this.handler<T>(request, response, controllerFunction)
         })
         this.addRoutes(router)
